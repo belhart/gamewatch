@@ -43,7 +43,7 @@ if (@$headers["X-Forwarded-For"]) {
 foreach ($allowed_ips as $allow) {
     if (stripos($ip, $allow) !== false) {
         $allowed = true;
-        break; 
+        break;
     }
 }
 
