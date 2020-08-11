@@ -15,9 +15,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           port: ${{ secrets.REMOTE_PORT }}
           password: ${{ secrets.REMOTE_PASSWORD }}
-          script: |
-            cd /var/www/game/gamewatch
-            touch test.txt
-            git pull
-            npm install
-            pm2 restart ./bin/www
+          script: whoami
