@@ -14,6 +14,6 @@ jobs:
          command: |
            cd /tmp
            ls -a
-         host: ${{ secrets.HOST }}
+         host: ${{ secrets.REMOTE_HOST }}
          user: root
-         key: ${{ secrets.PRIVATE_KEY}}
+         key: ${{ secrets.SERVER_SSH_KEY}}
