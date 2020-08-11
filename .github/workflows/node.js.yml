@@ -1,29 +1,21 @@
-name: Node CI
-
-on: [push]
-
+name: Deploy application
+ 
+on:
+  push:
+    branches: [ master ]
+ 
 jobs:
-  build:
-
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v1
-    - name: Install Node.js
-      uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - name: Install npm dependencies
-      run: npm install
-    - name: Run build task
-      run: npm run build --if-present
-    - name: Deploy to Server
-      uses: easingthemes/ssh-deploy@v2.1.1
-      env:
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          TARGET: ${{ secrets.REMOTE_TARGET }}
-    - name: Run
-      run: nodemon app.js
+      - name: Deploy NodeJS app
+        uses: appleboy/ssh-action@v0.1.2
+        with:
+          host: ${{secrets.REMOTE_HOST}}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.REMOTE_PASSWORD }}
+          script: |
+            cd /var/www/game/gamewatch
+            git pull
+            npm install
+            pm2 restart ./bin/www
