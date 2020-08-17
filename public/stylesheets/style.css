@@ -24,7 +24,9 @@
   height: 100%;
 }
 #test{
-  background-color: black;
+  background-color: rgba(0,0,0,0.7);
   color: white;
   border: none;
+  font-size: 300%;
+  text-transform: uppercase;
 }
