@@ -33,3 +33,8 @@
   font-size: 300%;
   text-transform: uppercase;
 }
+
+#resultImage{
+  width: 150px;
+  height: 150px;
+}

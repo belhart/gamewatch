@@ -82,30 +82,19 @@
     </div>
 </div>
 <hr class="my-4">
-
-<div id="app" v-cloak>
-    <input v-model="term" type="search">
-    <button @click="search">Search</button>
-
-    <div v-for="result in results" class="result">
-        <img :src="result.background_image">
-        <b>Game name:</b> {{result.name}}<br/>
-        <br clear="left">
-    </div>
-
-    <div v-if="noResults">
-        Sorry, but no results were found. I blame Apple.
-    </div>
-
-    <div v-if="searching">
-        <i>Searching...</i>
-    </div>
-
+<div class="results" id="searchresults">
 </div>
 <script>
     const node = document.getElementById("test");
-    node.addEventListener("keyup", function(event) {
+    node.addEventListener("keyup", async function(event) {
     if (event.key === "Enter") {
+        const keyword = node.value;
+        const ht = document.getElementById("searchresults");
+        var asd;
+        const results = await fetch('https://api.rawg.io/api/games?search='+keyword).then(res => res.json()).then(res => asd = res);
+        for(var i = 0; i < results.count; i++){
+            ht.innerHTML += '<img src='+ results.results[i].background_image +' id="resultImage">' + results.results[i].name + '<br>';
+        }
         
     }
 });
