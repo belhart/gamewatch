@@ -43,7 +43,7 @@
             <img src="https://2u.si/s7a4x4v4.jpg">
             <div class="layer"></div>
             <div class="carousel-caption">
-                <h1 class="display-2">Search for a game</h1>
+                <h1 class="display-2"   >Search for a game</h1>
                 <div class="input-group input-group-lg">
                     <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" id="test" spellcheck="false">
                   </div>
@@ -82,5 +82,35 @@
     </div>
 </div>
 <hr class="my-4">
+
+<div id="app" v-cloak>
+    <input v-model="term" type="search">
+    <button @click="search">Search</button>
+
+    <div v-for="result in results" class="result">
+        <img :src="result.background_image">
+        <b>Game name:</b> {{result.name}}<br/>
+        <br clear="left">
+    </div>
+
+    <div v-if="noResults">
+        Sorry, but no results were found. I blame Apple.
+    </div>
+
+    <div v-if="searching">
+        <i>Searching...</i>
+    </div>
+
+</div>
+<script>
+    const node = document.getElementById("test");
+    node.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        
+    }
+});
+</script>
+<script src="https://unpkg.com/vue"></script>
+    <script src="javascripts/app.js"></script>
 </body>
 </html>
